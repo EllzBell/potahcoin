@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017-2020 The Bitcoin Core developers
+# Copyright (c) 2017-2020 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Class for potahcoind node under test"""
@@ -36,7 +36,7 @@ from .util import (
     EncodeDecimal,
 )
 
-BITCOIND_PROC_WAIT_TIMEOUT = 60
+POTAHCOIND_PROC_WAIT_TIMEOUT = 60
 
 
 class FailedToStartError(Exception):
@@ -63,7 +63,7 @@ class TestNode():
     To make things easier for the test writer, any unrecognised messages will
     be dispatched to the RPC connection."""
 
-    def __init__(self, i, datadir, *, chain, rpchost, timewait, timeout_factor, bitcoind, bitcoin_cli, coverage_dir, cwd, extra_conf=None, extra_args=None, use_cli=False, start_perf=False, use_valgrind=False, version=None, descriptors=False):
+    def __init__(self, i, datadir, *, chain, rpchost, timewait, timeout_factor, potahcoind, potahcoin_cli, coverage_dir, cwd, extra_conf=None, extra_args=None, use_cli=False, start_perf=False, use_valgrind=False, version=None, descriptors=False):
         """
         Kwargs:
             start_perf (bool): If True, begin profiling the node with `perf` as soon as
@@ -72,13 +72,13 @@ class TestNode():
 
         self.index = i
         self.datadir = datadir
-        self.bitcoinconf = os.path.join(self.datadir, "potahcoin.conf")
+        self.potahcoinconf = os.path.join(self.datadir, "potahcoin.conf")
         self.stdout_dir = os.path.join(self.datadir, "stdout")
         self.stderr_dir = os.path.join(self.datadir, "stderr")
         self.chain = chain
         self.rpchost = rpchost
         self.rpc_timeout = timewait
-        self.binary = bitcoind
+        self.binary = potahcoind
         self.coverage_dir = coverage_dir
         self.cwd = cwd
         self.descriptors = descriptors
@@ -89,8 +89,8 @@ class TestNode():
         # Note that common args are set in the config file (see initialize_datadir)
         self.extra_args = extra_args
         self.version = version
-        # Configuration for logging is set as command-line args rather than in the bitcoin.conf file.
-        # This means that starting a bitcoind using the temp dir to debug a failed test won't
+        # Configuration for logging is set as command-line args rather than in the potahcoin.conf file.
+        # This means that starting a potahcoind using the temp dir to debug a failed test won't
         # spam debug.log.
         self.args = [
             self.binary,
@@ -114,7 +114,7 @@ class TestNode():
         if self.version_is_at_least(190000):
             self.args.append("-logthreadnames")
 
-        self.cli = TestNodeCLI(bitcoin_cli, self.datadir)
+        self.cli = TestNodeCLI(potahcoin_cli, self.datadir)
         self.use_cli = use_cli
         self.start_perf = start_perf
 
@@ -162,7 +162,7 @@ class TestNode():
         raise AssertionError(self._node_msg(msg))
 
     def __del__(self):
-        # Ensure that we don't leave any bitcoind processes lying around after
+        # Ensure that we don't leave any potahcoind processes lying around after
         # the test ends
         if self.process and self.cleanup_on_exit:
             # Should only happen on test failure
@@ -184,7 +184,7 @@ class TestNode():
         if extra_args is None:
             extra_args = self.extra_args
 
-        # Add a new stdout and stderr file each time bitcoind is started
+        # Add a new stdout and stderr file each time potahcoind is started
         if stderr is None:
             stderr = tempfile.NamedTemporaryFile(dir=self.stderr_dir, delete=False)
         if stdout is None:
@@ -196,7 +196,7 @@ class TestNode():
             cwd = self.cwd
 
         # Delete any existing cookie file -- if such a file exists (eg due to
-        # unclean shutdown), it will get overwritten anyway by bitcoind, and
+        # unclean shutdown), it will get overwritten anyway by potahcoind, and
         # potentially interfere with our attempt to authenticate
         delete_cookie_file(self.datadir, self.chain)
 
@@ -272,7 +272,7 @@ class TestNode():
                     pass  # Port not yet open?
                 else:
                     raise  # unknown OS error
-            except ValueError as e:  # cookie file not found and no rpcuser or rpcpassword; bitcoind is still starting
+            except ValueError as e:  # cookie file not found and no rpcuser or rpcpassword; potahcoind is still starting
                 if "No RPC credentials" not in str(e):
                     raise
             time.sleep(1.0 / poll_per_s)
@@ -288,7 +288,7 @@ class TestNode():
                 get_auth_cookie(self.datadir, self.chain)
                 self.log.debug("Cookie credentials successfully retrieved")
                 return
-            except ValueError:  # cookie file not found and no rpcuser or rpcpassword; bitcoind is still starting
+            except ValueError:  # cookie file not found and no rpcuser or rpcpassword; potahcoind is still starting
                 pass            # so we continue polling until RPC credentials are retrieved
             time.sleep(1.0 / poll_per_s)
         self._raise_assertion_error("Unable to retrieve cookie credentials after {}s".format(self.rpc_timeout))
@@ -358,7 +358,7 @@ class TestNode():
         self.log.debug("Node stopped")
         return True
 
-    def wait_until_stopped(self, timeout=BITCOIND_PROC_WAIT_TIMEOUT):
+    def wait_until_stopped(self, timeout=POTAHCOIND_PROC_WAIT_TIMEOUT):
         wait_until_helper(self.is_node_stopped, timeout=timeout, timeout_factor=self.timeout_factor)
 
     @contextlib.contextmanager
@@ -616,10 +616,10 @@ class TestNodeCLI():
         self.binary = binary
         self.datadir = datadir
         self.input = None
-        self.log = logging.getLogger('TestFramework.bitcoincli')
+        self.log = logging.getLogger('TestFramework.potahcoincli')
 
     def __call__(self, *options, input=None):
-        # TestNodeCLI is callable with bitcoin-cli command-line options
+        # TestNodeCLI is callable with potahcoin-cli command-line options
         cli = TestNodeCLI(self.binary, self.datadir)
         cli.options = [str(o) for o in options]
         cli.input = input

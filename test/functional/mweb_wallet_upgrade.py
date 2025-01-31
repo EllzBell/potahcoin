@@ -7,11 +7,11 @@
 import os
 import shutil
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.ltc_util import create_non_hd_wallet, setup_mweb_chain
 from test_framework.util import assert_equal
 
-class MWEBWalletUpgradeTest(BitcoinTestFramework):
+class MWEBWalletUpgradeTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

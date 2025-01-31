@@ -20,15 +20,15 @@ This release contains fixes for the following security vulnerabilities:
 which allows remote attackers to cause a denial of service (blocktxn message-handling assertion and node exit)
 by including transactions in a blocktxn message that are not committed to in a block's merkle root.
 FillBlock can be called twice for one PartiallyDownloadedBlock instance.
-  - `5d4a2e5`: backported from Bitcoin Core (`a8897f6`)
+  - `5d4a2e5`: backported from Potahcoin Core (`a8897f6`)
 
-- [Hindered block propagation due to mutated blocks](https://bitcoincore.org/en/2024/10/08/disclose-mutated-blocks-hindering-propagation/),
+- [Hindered block propagation due to mutated blocks](https://potahcoincore.org/en/2024/10/08/disclose-mutated-blocks-hindering-propagation/),
 where a peer could send mutated blocks which could clear the download state of other peers that also announced block, hindering block propagation.
-  - `dab3bb7`: backported from Bitcoin Core (`dbfc748`)
+  - `dab3bb7`: backported from Potahcoin Core (`dbfc748`)
 
-- [Infinite loop bug in miniupnp dependency](https://bitcoincore.org/en/2024/07/31/disclose-upnp-oom/),
+- [Infinite loop bug in miniupnp dependency](https://potahcoincore.org/en/2024/07/31/disclose-upnp-oom/),
 which could be exploited by an attacker on the local network to trigger an OOM.
-  - `16ba8b8`: backported from Bitcoin Core (`fa2a5b8`)
+  - `16ba8b8`: backported from Potahcoin Core (`fa2a5b8`)
 
 Bug fixes
 ---------
@@ -43,7 +43,7 @@ Credits
 
 Thanks to everyone who directly contributed to this release:
 
-- [The Bitcoin Core Developers](https://github.com/bitcoin/bitcoin/)
+- [The Potahcoin Core Developers](https://github.com/potahcoin/potahcoin/)
 - [David Burkett](https://github.com/DavidBurkett/)
 - [Hector Chu](https://github.com/hectorchu)
 - [Loshan](https://github.com/losh11)

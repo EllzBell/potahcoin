@@ -10,7 +10,7 @@ define(_COPYRIGHT_HOLDERS,[The %s developers])
 define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Potahcoin Core]])
 AC_INIT([Potahcoin Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/potahcoin-project/potahcoin/issues],[potahcoin],[https://potahcoin.org/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
-AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
+AC_CONFIG_HEADERS([src/config/potahcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
@@ -20,11 +20,11 @@ if test "x$PKG_CONFIG" = x; then
   AC_MSG_ERROR([pkg-config not found])
 fi
 
-BITCOIN_DAEMON_NAME=potahcoind
-BITCOIN_GUI_NAME=potahcoin-qt
-BITCOIN_CLI_NAME=potahcoin-cli
-BITCOIN_TX_NAME=potahcoin-tx
-BITCOIN_WALLET_TOOL_NAME=potahcoin-wallet
+POTAHCOIN_DAEMON_NAME=potahcoind
+POTAHCOIN_GUI_NAME=potahcoin-qt
+POTAHCOIN_CLI_NAME=potahcoin-cli
+POTAHCOIN_TX_NAME=potahcoin-tx
+POTAHCOIN_WALLET_TOOL_NAME=potahcoin-wallet
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -34,9 +34,9 @@ fi
 
 AC_CANONICAL_HOST
 
-AH_TOP([#ifndef BITCOIN_CONFIG_H])
-AH_TOP([#define BITCOIN_CONFIG_H])
-AH_BOTTOM([#endif //BITCOIN_CONFIG_H])
+AH_TOP([#ifndef POTAHCOIN_CONFIG_H])
+AH_TOP([#define POTAHCOIN_CONFIG_H])
+AH_BOTTOM([#endif //POTAHCOIN_CONFIG_H])
 
 dnl faketime breaks configure and is only needed for make. Disable it here.
 unset FAKETIME
@@ -198,7 +198,7 @@ AC_ARG_ENABLE([ccache],
 
 dnl Suppress warnings from external headers (e.g. Boost, Qt).
 dnl May be useful if warnings from external headers clutter the build output
-dnl too much, so that it becomes difficult to spot Bitcoin Core warnings
+dnl too much, so that it becomes difficult to spot Potahcoin Core warnings
 dnl or if they cause a build failure with --enable-werror.
 AC_ARG_ENABLE([suppress-external-warnings],
   [AS_HELP_STRING([--enable-suppress-external-warnings],
@@ -562,38 +562,38 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
   [build potahcoin-cli potahcoin-tx potahcoin-wallet (default=yes)])],
-  [build_bitcoin_utils=$withval],
-  [build_bitcoin_utils=yes])
+  [build_potahcoin_utils=$withval],
+  [build_potahcoin_utils=yes])
 
 AC_ARG_ENABLE([util-cli],
   [AS_HELP_STRING([--enable-util-cli],
   [build potahcoin-cli])],
-  [build_bitcoin_cli=$enableval],
-  [build_bitcoin_cli=$build_bitcoin_utils])
+  [build_potahcoin_cli=$enableval],
+  [build_potahcoin_cli=$build_potahcoin_utils])
 
 AC_ARG_ENABLE([util-tx],
   [AS_HELP_STRING([--enable-util-tx],
   [build potahcoin-tx])],
-  [build_bitcoin_tx=$enableval],
-  [build_bitcoin_tx=$build_bitcoin_utils])
+  [build_potahcoin_tx=$enableval],
+  [build_potahcoin_tx=$build_potahcoin_utils])
 
 AC_ARG_ENABLE([util-wallet],
   [AS_HELP_STRING([--enable-util-wallet],
   [build potahcoin-wallet])],
-  [build_bitcoin_wallet=$enableval],
-  [build_bitcoin_wallet=$build_bitcoin_utils])
+  [build_potahcoin_wallet=$enableval],
+  [build_potahcoin_wallet=$build_potahcoin_utils])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
   [build libraries (default=yes)])],
-  [build_bitcoin_libs=$withval],
-  [build_bitcoin_libs=yes])
+  [build_potahcoin_libs=$withval],
+  [build_potahcoin_libs=yes])
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
   [build potahcoind daemon (default=yes)])],
-  [build_bitcoind=$withval],
-  [build_bitcoind=yes])
+  [build_potahcoind=$withval],
+  [build_potahcoind=yes])
 
 pkg_openssl=no
 case $host in
@@ -656,7 +656,7 @@ case $host in
 
          if test "x$use_bdb" != xno && $BREW list --versions berkeley-db4 >/dev/null && test "x$BDB_CFLAGS" = "x" && test "x$BDB_LIBS" = "x"; then
            bdb_prefix=$($BREW --prefix berkeley-db4 2>/dev/null)
-           dnl This must precede the call to BITCOIN_FIND_BDB48 below.
+           dnl This must precede the call to POTAHCOIN_FIND_BDB48 below.
            BDB_CFLAGS="-I$bdb_prefix/include"
            BDB_LIBS="-L$bdb_prefix/lib -ldb_cxx-4.8"
          fi
@@ -768,7 +768,7 @@ AC_C_BIGENDIAN
 dnl Check for pthread compile/link requirements
 AX_PTHREAD
 
-dnl The following macro will add the necessary defines to bitcoin-config.h, but
+dnl The following macro will add the necessary defines to potahcoin-config.h, but
 dnl they also need to be passed down to any subprojects. Pull the results out of
 dnl the cache and add them to CPPFLAGS.
 AC_SYS_LARGEFILE
@@ -1198,15 +1198,15 @@ AC_DEFUN([SUPPRESS_WARNINGS],
 dnl enable-fuzz should disable all other targets
 if test "x$enable_fuzz" = "xyes"; then
   AC_MSG_WARN(enable-fuzz will disable all other targets)
-  build_bitcoin_utils=no
-  build_bitcoin_cli=no
-  build_bitcoin_tx=no
-  build_bitcoin_wallet=no
-  build_bitcoind=no
-  build_bitcoin_libs=no
-  bitcoin_enable_qt=no
-  bitcoin_enable_qt_test=no
-  bitcoin_enable_qt_dbus=no
+  build_potahcoin_utils=no
+  build_potahcoin_cli=no
+  build_potahcoin_tx=no
+  build_potahcoin_wallet=no
+  build_potahcoind=no
+  build_potahcoin_libs=no
+  potahcoin_enable_qt=no
+  potahcoin_enable_qt_test=no
+  potahcoin_enable_qt_dbus=no
   enable_wallet=no
   use_bench=no
   use_upnp=no
@@ -1226,10 +1226,10 @@ if test "x$enable_fuzz" = "xyes"; then
       /* unterminated comment to remove the main function ...
     ]],[[]])])
 else
-  BITCOIN_QT_INIT
+  POTAHCOIN_QT_INIT
 
-  dnl sets $bitcoin_enable_qt, $bitcoin_enable_qt_test, $bitcoin_enable_qt_dbus
-  BITCOIN_QT_CONFIGURE([5.5.1])
+  dnl sets $potahcoin_enable_qt, $potahcoin_enable_qt_test, $potahcoin_enable_qt_dbus
+  POTAHCOIN_QT_CONFIGURE([5.5.1])
 
   dnl Keep a copy of the original $QT_INCLUDES and use it when invoking qt's moc
   QT_INCLUDES_UNSUPPRESSED=$QT_INCLUDES
@@ -1242,7 +1242,7 @@ fi
 
 if test x$enable_wallet != xno; then
     dnl Check for libdb_cxx only if wallet enabled
-    BITCOIN_FIND_BDB48
+    POTAHCOIN_FIND_BDB48
     if test x$suppress_external_warnings != xno ; then
         BDB_CPPFLAGS=SUPPRESS_WARNINGS($BDB_CPPFLAGS)
     fi
@@ -1297,7 +1297,7 @@ if test x$have_miniupnpc != xno; then
 fi
 fi
 
-if test x$build_bitcoin_wallet$build_bitcoin_cli$build_bitcoin_tx$build_bitcoind$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
+if test x$build_potahcoin_wallet$build_potahcoin_cli$build_potahcoin_tx$build_potahcoind$potahcoin_enable_qt$use_tests$use_bench = xnonononononono; then
     use_boost=no
 else
     use_boost=yes
@@ -1311,7 +1311,7 @@ define(MINIMUM_REQUIRED_BOOST, 1.58.0)
 dnl Check for Boost libs
 AX_BOOST_BASE([MINIMUM_REQUIRED_BOOST])
 if test x$want_boost = xno; then
-    AC_MSG_ERROR([[only libbitcoinconsensus can be built without boost]])
+    AC_MSG_ERROR([[only libpotahcoinconsensus can be built without boost]])
 fi
 AX_BOOST_SYSTEM
 AX_BOOST_FILESYSTEM
@@ -1382,7 +1382,7 @@ fi
 
 dnl libevent check
 
-if test x$build_bitcoin_cli$build_bitcoind$bitcoin_enable_qt$use_tests$use_bench != xnonononono; then
+if test x$build_potahcoin_cli$build_potahcoind$potahcoin_enable_qt$use_tests$use_bench != xnonononono; then
   PKG_CHECK_MODULES([EVENT], [libevent >= 2.0.21], [use_libevent=yes], [AC_MSG_ERROR([libevent version 2.0.21 or greater not found.])])
   if test x$TARGET_OS != xwindows; then
     PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads >= 2.0.21],, [AC_MSG_ERROR([libevent_pthreads version 2.0.21 or greater not found.])])
@@ -1392,7 +1392,7 @@ fi
 dnl QR Code encoding library check
 
 if test "x$use_qr" != xno; then
-  BITCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
+  POTAHCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
 fi
 
 dnl ZMQ check
@@ -1422,7 +1422,7 @@ AC_CHECK_LIB([fmt],[main],MWEB_LIBS=-lfmt,AC_MSG_ERROR(libfmt missing))
 dnl univalue check
 
 need_bundled_univalue=yes
-if test x$build_bitcoin_wallet$build_bitcoin_cli$build_bitcoin_tx$build_bitcoind$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
+if test x$build_potahcoin_wallet$build_potahcoin_cli$build_potahcoin_tx$build_potahcoind$potahcoin_enable_qt$use_tests$use_bench = xnonononononono; then
   need_bundled_univalue=no
 else
   if test x$system_univalue != xno; then
@@ -1475,8 +1475,8 @@ else
 fi
 
 AM_CONDITIONAL([BUILD_MULTIPROCESS],[test "x$build_multiprocess" = xyes])
-AM_CONDITIONAL([BUILD_BITCOIN_NODE], [test "x$build_multiprocess" = xyes])
-AM_CONDITIONAL([BUILD_BITCOIN_GUI], [test "x$build_multiprocess" = xyes])
+AM_CONDITIONAL([BUILD_POTAHCOIN_NODE], [test "x$build_multiprocess" = xyes])
+AM_CONDITIONAL([BUILD_POTAHCOIN_GUI], [test "x$build_multiprocess" = xyes])
 
 dnl codegen tools check
 
@@ -1490,28 +1490,28 @@ if test x$build_multiprocess != xno; then
 fi
 
 AC_MSG_CHECKING([whether to build potahcoind])
-AM_CONDITIONAL([BUILD_BITCOIND], [test x$build_bitcoind = xyes])
-AC_MSG_RESULT($build_bitcoind)
+AM_CONDITIONAL([BUILD_POTAHCOIND], [test x$build_potahcoind = xyes])
+AC_MSG_RESULT($build_potahcoind)
 
 AC_MSG_CHECKING([whether to build potahcoin-cli])
-AM_CONDITIONAL([BUILD_BITCOIN_CLI], [test x$build_bitcoin_cli = xyes])
-AC_MSG_RESULT($build_bitcoin_cli)
+AM_CONDITIONAL([BUILD_POTAHCOIN_CLI], [test x$build_potahcoin_cli = xyes])
+AC_MSG_RESULT($build_potahcoin_cli)
 
 AC_MSG_CHECKING([whether to build potahcoin-tx])
-AM_CONDITIONAL([BUILD_BITCOIN_TX], [test x$build_bitcoin_tx = xyes])
-AC_MSG_RESULT($build_bitcoin_tx)
+AM_CONDITIONAL([BUILD_POTAHCOIN_TX], [test x$build_potahcoin_tx = xyes])
+AC_MSG_RESULT($build_potahcoin_tx)
 
 AC_MSG_CHECKING([whether to build potahcoin-wallet])
-AM_CONDITIONAL([BUILD_BITCOIN_WALLET], [test x$build_bitcoin_wallet = xyes])
-AC_MSG_RESULT($build_bitcoin_wallet)
+AM_CONDITIONAL([BUILD_POTAHCOIN_WALLET], [test x$build_potahcoin_wallet = xyes])
+AC_MSG_RESULT($build_potahcoin_wallet)
 
 AC_MSG_CHECKING([whether to build libraries])
-AM_CONDITIONAL([BUILD_BITCOIN_LIBS], [test x$build_bitcoin_libs = xyes])
-if test x$build_bitcoin_libs = xyes; then
+AM_CONDITIONAL([BUILD_POTAHCOIN_LIBS], [test x$build_potahcoin_libs = xyes])
+if test x$build_potahcoin_libs = xyes; then
   AC_DEFINE(HAVE_CONSENSUS_LIB, 1, [Define this symbol if the consensus lib has been built])
-  AC_CONFIG_FILES([libbitcoinconsensus.pc:libbitcoinconsensus.pc.in])
+  AC_CONFIG_FILES([libpotahcoinconsensus.pc:libpotahcoinconsensus.pc.in])
 fi
-AC_MSG_RESULT($build_bitcoin_libs)
+AC_MSG_RESULT($build_potahcoin_libs)
 
 AC_LANG_POP
 
@@ -1571,13 +1571,13 @@ fi
 
 dnl these are only used when qt is enabled
 BUILD_TEST_QT=""
-if test x$bitcoin_enable_qt != xno; then
+if test x$potahcoin_enable_qt != xno; then
   dnl enable dbus support
   AC_MSG_CHECKING([whether to build GUI with support for D-Bus])
-  if test x$bitcoin_enable_qt_dbus != xno; then
+  if test x$potahcoin_enable_qt_dbus != xno; then
     AC_DEFINE([USE_DBUS],[1],[Define if dbus support should be compiled in])
   fi
-  AC_MSG_RESULT($bitcoin_enable_qt_dbus)
+  AC_MSG_RESULT($potahcoin_enable_qt_dbus)
 
   dnl enable qr support
   AC_MSG_CHECKING([whether to build GUI with support for QR codes])
@@ -1599,7 +1599,7 @@ if test x$bitcoin_enable_qt != xno; then
   fi
 
   AC_MSG_CHECKING([whether to build test_potahcoin-qt])
-  if test x$use_gui_tests$bitcoin_enable_qt_test = xyesyes; then
+  if test x$use_gui_tests$potahcoin_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
@@ -1635,7 +1635,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test x$build_bitcoin_wallet$build_bitcoin_cli$build_bitcoin_tx$build_bitcoin_libs$build_bitcoind$bitcoin_enable_qt$use_bench$use_tests = xnononononononono; then
+if test x$build_potahcoin_wallet$build_potahcoin_cli$build_potahcoin_tx$build_potahcoin_libs$build_potahcoind$potahcoin_enable_qt$use_bench$use_tests = xnononononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1647,7 +1647,7 @@ AM_CONDITIONAL([ENABLE_WALLET],[test x$enable_wallet = xyes])
 AM_CONDITIONAL([USE_SQLITE], [test "x$use_sqlite" = "xyes"])
 AM_CONDITIONAL([ENABLE_TESTS],[test x$BUILD_TEST = xyes])
 AM_CONDITIONAL([ENABLE_FUZZ],[test x$enable_fuzz = xyes])
-AM_CONDITIONAL([ENABLE_QT],[test x$bitcoin_enable_qt = xyes])
+AM_CONDITIONAL([ENABLE_QT],[test x$potahcoin_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$BUILD_TEST_QT = xyes])
 AM_CONDITIONAL([ENABLE_BENCH],[test x$use_bench = xyes])
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
@@ -1683,11 +1683,11 @@ AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
 AC_SUBST(COPYRIGHT_HOLDERS, "_COPYRIGHT_HOLDERS")
 AC_SUBST(COPYRIGHT_HOLDERS_SUBSTITUTION, "_COPYRIGHT_HOLDERS_SUBSTITUTION")
 AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
-AC_SUBST(BITCOIN_DAEMON_NAME)
-AC_SUBST(BITCOIN_GUI_NAME)
-AC_SUBST(BITCOIN_CLI_NAME)
-AC_SUBST(BITCOIN_TX_NAME)
-AC_SUBST(BITCOIN_WALLET_TOOL_NAME)
+AC_SUBST(POTAHCOIN_DAEMON_NAME)
+AC_SUBST(POTAHCOIN_GUI_NAME)
+AC_SUBST(POTAHCOIN_CLI_NAME)
+AC_SUBST(POTAHCOIN_TX_NAME)
+AC_SUBST(POTAHCOIN_WALLET_TOOL_NAME)
 
 AC_SUBST(RELDFLAGS)
 AC_SUBST(DEBUG_CPPFLAGS)
@@ -1742,7 +1742,7 @@ AC_CONFIG_LINKS([contrib/devtools/test-security-check.py:contrib/devtools/test-s
 AC_CONFIG_LINKS([contrib/filter-lcov.py:contrib/filter-lcov.py])
 AC_CONFIG_LINKS([test/functional/test_runner.py:test/functional/test_runner.py])
 AC_CONFIG_LINKS([test/fuzz/test_runner.py:test/fuzz/test_runner.py])
-AC_CONFIG_LINKS([test/util/bitcoin-util-test.py:test/util/bitcoin-util-test.py])
+AC_CONFIG_LINKS([test/util/potahcoin-util-test.py:test/util/potahcoin-util-test.py])
 AC_CONFIG_LINKS([test/util/rpcauth-test.py:test/util/rpcauth-test.py])
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
@@ -1793,8 +1793,8 @@ echo "  with wallet   = $enable_wallet"
 if test "x$enable_wallet" != "xno"; then
     echo "    with sqlite = $use_sqlite"
 fi
-echo "  with gui / qt = $bitcoin_enable_qt"
-if test x$bitcoin_enable_qt != xno; then
+echo "  with gui / qt = $potahcoin_enable_qt"
+if test x$potahcoin_enable_qt != xno; then
     echo "    with qr     = $use_qr"
 fi
 echo "  pkg openssl   = $pkg_openssl"

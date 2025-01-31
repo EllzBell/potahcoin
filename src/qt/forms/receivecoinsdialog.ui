@@ -111,7 +111,7 @@
              <string>&amp;Create new receiving address</string>
             </property>
             <property name="icon">
-             <iconset resource="../bitcoin.qrc">
+             <iconset resource="../potahcoin.qrc">
               <normaloff>:/icons/receiving_addresses</normaloff>:/icons/receiving_addresses</iconset>
             </property>
             <property name="autoDefault">
@@ -137,7 +137,7 @@
              <string>Clear</string>
             </property>
             <property name="icon">
-             <iconset resource="../bitcoin.qrc">
+             <iconset resource="../potahcoin.qrc">
               <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
             </property>
             <property name="autoDefault">
@@ -170,7 +170,7 @@
         <item row="5" column="2">
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="BitcoinAmountField" name="reqAmount">
+           <widget class="PotahcoinAmountField" name="reqAmount">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -314,7 +314,7 @@
            <string>Show</string>
           </property>
           <property name="icon">
-           <iconset resource="../bitcoin.qrc">
+           <iconset resource="../potahcoin.qrc">
             <normaloff>:/icons/edit</normaloff>:/icons/edit</iconset>
           </property>
           <property name="autoDefault">
@@ -334,7 +334,7 @@
            <string>Remove</string>
           </property>
           <property name="icon">
-           <iconset resource="../bitcoin.qrc">
+           <iconset resource="../potahcoin.qrc">
             <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
           </property>
           <property name="autoDefault">
@@ -364,9 +364,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BitcoinAmountField</class>
+   <class>PotahcoinAmountField</class>
    <extends>QLineEdit</extends>
-   <header>qt/bitcoinamountfield.h</header>
+   <header>qt/potahcoinamountfield.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -382,7 +382,7 @@
   <tabstop>removeRequestButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../bitcoin.qrc"/>
+  <include location="../potahcoin.qrc"/>
  </resources>
  <connections/>
 </ui>

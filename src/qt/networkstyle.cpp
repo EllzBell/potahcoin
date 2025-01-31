@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019 The Bitcoin Core developers
+// Copyright (c) 2014-2019 The Potahcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -32,7 +32,7 @@ NetworkStyle::NetworkStyle(const QString &_appName, const int iconColorHueShift,
     // load pixmap
     QPixmap pixmap;
     if (std::char_traits<char>::length(_titleAddText) == 0) {
-        pixmap.load(":/icons/bitcoin");
+        pixmap.load(":/icons/potahcoin");
     } else {
         pixmap.load(":/icons/potahcoin_splash");
     }

@@ -393,7 +393,7 @@ Credits
 
 Thanks to everyone who directly contributed to this release:
 
-- [The Bitcoin Core Developers]
+- [The Potahcoin Core Developers]
 - Adrian Gallagher
 - David Burkett
 

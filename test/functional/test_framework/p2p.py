@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2010 ArtForz -- public domain half-a-node
 # Copyright (c) 2012 Jeff Garzik
-# Copyright (c) 2010-2020 The Bitcoin Core developers
+# Copyright (c) 2010-2020 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test objects for interacting with a bitcoind node over the p2p protocol.
+"""Test objects for interacting with a potahcoind node over the p2p protocol.
 
-The P2PInterface objects interact with the bitcoind nodes under test using the
+The P2PInterface objects interact with the potahcoind nodes under test using the
 node's p2p interface. They can be used to send messages to the node, and
 callbacks can be registered that execute when messages are received from the
 node. Messages are sent to/received from the node on an asyncio event loop.

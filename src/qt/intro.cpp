@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2020 The Bitcoin Core developers
+// Copyright (c) 2011-2020 The Potahcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/potahcoin-config.h>
 #endif
 
 #include <chainparams.h>
@@ -208,7 +208,7 @@ bool Intro::showIfNeeded(bool& did_show_intro, bool& prune)
         /* If current default data directory does not exist, let the user choose one */
         Intro intro(0, Params().AssumedBlockchainSize(), Params().AssumedChainStateSize());
         intro.setDataDirectory(dataDir);
-        intro.setWindowIcon(QIcon(":icons/bitcoin"));
+        intro.setWindowIcon(QIcon(":icons/potahcoin"));
         did_show_intro = true;
 
         while(true)
@@ -239,8 +239,8 @@ bool Intro::showIfNeeded(bool& did_show_intro, bool& prune)
         settings.setValue("fReset", false);
     }
     /* Only override -datadir if different from the default, to make it possible to
-     * override -datadir in the bitcoin.conf file in the default data directory
-     * (to be consistent with bitcoind behavior)
+     * override -datadir in the potahcoin.conf file in the default data directory
+     * (to be consistent with potahcoind behavior)
      */
     if(dataDir != GUIUtil::getDefaultDataDirectory()) {
         gArgs.SoftSetArg("-datadir", GUIUtil::qstringToBoostPath(dataDir).string()); // use OS locale for path setting

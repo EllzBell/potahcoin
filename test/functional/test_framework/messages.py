@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # Copyright (c) 2010 ArtForz -- public domain half-a-node
 # Copyright (c) 2012 Jeff Garzik
-# Copyright (c) 2010-2020 The Bitcoin Core developers
+# Copyright (c) 2010-2020 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Bitcoin test framework primitive and message structures
+"""Potahcoin test framework primitive and message structures
 
 CBlock, CTransaction, CBlockHeader, CTxIn, CTxOut, etc....:
     data structures that should map to corresponding structures in
-    bitcoin/primitives
+    potahcoin/primitives
 
 msg_block, msg_tx, msg_headers, etc.:
     data structures that represent network messages
@@ -260,13 +260,13 @@ def FromHex(obj, hex_string):
 def ToHex(obj):
     return obj.serialize().hex()
 
-# Objects that map to bitcoind objects, which can be serialized/deserialized
+# Objects that map to potahcoind objects, which can be serialized/deserialized
 
 
 class CAddress:
     __slots__ = ("net", "ip", "nServices", "port", "time")
 
-    # see https://github.com/bitcoin/bips/blob/master/bip-0155.mediawiki
+    # see https://github.com/potahcoin/bips/blob/master/bip-0155.mediawiki
     NET_IPV4 = 1
 
     ADDRV2_NET_NAME = {
@@ -577,7 +577,7 @@ class CTransaction:
         if len(self.vin) == 0:
             flags = struct.unpack("<B", f.read(1))[0]
             # Not sure why flags can't be zero, but this
-            # matches the implementation in bitcoind
+            # matches the implementation in potahcoind
             if (flags != 0):
                 self.vin = deser_vector(f, CTxIn)
                 self.vout = deser_vector(f, CTxOut)
@@ -1565,7 +1565,7 @@ class msg_headers:
         self.headers = headers if headers is not None else []
 
     def deserialize(self, f):
-        # comment in bitcoind indicates these should be deserialized as blocks
+        # comment in potahcoind indicates these should be deserialized as blocks
         blocks = deser_vector(f, CBlock)
         for x in blocks:
             self.headers.append(CBlockHeader(x))

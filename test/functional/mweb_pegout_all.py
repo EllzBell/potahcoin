@@ -4,11 +4,11 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Verify that we can pegout all coins in the MWEB"""
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.util import assert_equal
 from test_framework.ltc_util import get_hog_addr_txout, setup_mweb_chain
 
-class MWEBPegoutAllTest(BitcoinTestFramework):
+class MWEBPegoutAllTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

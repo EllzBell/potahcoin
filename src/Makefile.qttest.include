@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Copyright (c) 2013-2016 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -26,7 +26,7 @@ TEST_QT_H = \
   qt/test/util.h \
   qt/test/wallettests.h
 
-qt_test_test_potahcoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+qt_test_test_potahcoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(POTAHCOIN_INCLUDES) $(POTAHCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_TEST_INCLUDES)
 
 qt_test_test_potahcoin_qt_SOURCES = \
@@ -46,14 +46,14 @@ endif # ENABLE_WALLET
 
 nodist_qt_test_test_potahcoin_qt_SOURCES = $(TEST_QT_MOC_CPP)
 
-qt_test_test_potahcoin_qt_LDADD = $(LIBBITCOINQT) $(LIBBITCOIN_SERVER) $(LIBTEST_UTIL)
+qt_test_test_potahcoin_qt_LDADD = $(LIBPOTAHCOINQT) $(LIBPOTAHCOIN_SERVER) $(LIBTEST_UTIL)
 if ENABLE_WALLET
-qt_test_test_potahcoin_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+qt_test_test_potahcoin_qt_LDADD += $(LIBPOTAHCOIN_UTIL) $(LIBPOTAHCOIN_WALLET)
 endif
 if ENABLE_ZMQ
-qt_test_test_potahcoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+qt_test_test_potahcoin_qt_LDADD += $(LIBPOTAHCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-qt_test_test_potahcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) \
+qt_test_test_potahcoin_qt_LDADD += $(LIBPOTAHCOIN_CLI) $(LIBPOTAHCOIN_COMMON) $(LIBPOTAHCOIN_UTIL) $(LIBPOTAHCOIN_CONSENSUS) $(LIBPOTAHCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) \
   $(LIBLEVELDB_SSE42) $(LIBMEMENV) $(LIBMW) $(MWEB_LIBS) $(BOOST_LIBS) $(QT_DBUS_LIBS) $(QT_TEST_LIBS) $(QT_LIBS) \
   $(QR_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(SQLITE_LIBS)

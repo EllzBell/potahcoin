@@ -4,11 +4,11 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Basic MWEB Wallet test"""
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.ltc_util import setup_mweb_chain
 from test_framework.util import assert_equal
 
-class MWEBWalletBasicTest(BitcoinTestFramework):
+class MWEBWalletBasicTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3

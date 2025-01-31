@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# Copyright (c) 2015-2019 The Bitcoin Core developers
+# Copyright (c) 2015-2019 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test multiple RPC users."""
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.util import (
     assert_equal,
     get_datadir_path,
@@ -33,14 +33,14 @@ def call_with_auth(node, user, password):
     return resp
 
 
-class HTTPBasicsTest(BitcoinTestFramework):
+class HTTPBasicsTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.supports_cli = False
 
     def setup_chain(self):
         super().setup_chain()
-        #Append rpcauth to bitcoin.conf before initialization
+        #Append rpcauth to potahcoin.conf before initialization
         self.rtpassword = "cA773lm788buwYe4g4WT+05pKyNruVKjQ25x3n0DQcM="
         rpcauth = "rpcauth=rt:93648e835a54c573682c2eb19f882535$7681e9c5b74bdd85e78166031d2058e1069b3ed7ed967c93fc63abba06f31144"
 

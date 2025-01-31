@@ -1,0 +1,33 @@
+# /etc/conf.d/potahcoind: config file for /etc/init.d/potahcoind
+
+# Config file location
+#POTAHCOIND_CONFIGFILE="/etc/potahcoin/potahcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $POTAHCOIND_USER)
+#POTAHCOIND_PIDDIR="/var/run/potahcoind"
+
+# What filename to give the pidfile
+#POTAHCOIND_PIDFILE="${POTAHCOIND_PIDDIR}/potahcoind.pid"
+
+# Where to write potahcoind data (be mindful that the blockchain is large)
+#POTAHCOIND_DATADIR="/var/lib/potahcoind"
+
+# User and group to own potahcoind process
+#POTAHCOIND_USER="potahcoin"
+#POTAHCOIND_GROUP="potahcoin"
+
+# Path to potahcoind executable
+#POTAHCOIND_BIN="/usr/bin/potahcoind"
+
+# Nice value to run potahcoind under
+#POTAHCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#POTAHCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for potahcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+POTAHCOIND_SIGTERM_TIMEOUT=600

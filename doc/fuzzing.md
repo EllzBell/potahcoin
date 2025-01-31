@@ -10,7 +10,7 @@ $ cd potahcoin/
 $ ./autogen.sh
 $ CC=clang CXX=clang++ ./configure --enable-fuzz --with-sanitizers=address,fuzzer,undefined
 # macOS users: If you have problem with this step then make sure to read "macOS hints for
-# libFuzzer" on https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md#macos-hints-for-libfuzzer
+# libFuzzer" on https://github.com/potahcoin/potahcoin/blob/master/doc/fuzzing.md#macos-hints-for-libfuzzer
 $ make
 $ src/test/fuzz/process_message
 # abort fuzzing using ctrl-c
@@ -64,12 +64,12 @@ block^@M-^?M-^?M-^?M-^?M-^?nM-^?M-^?
 
 In this case the fuzzer managed to create a `block` message which when passed to `ProcessMessage(...)` increased coverage.
 
-The project's collection of seed corpora is found in the [`bitcoin-core/qa-assets`](https://github.com/bitcoin-core/qa-assets) repo.
+The project's collection of seed corpora is found in the [`potahcoin-core/qa-assets`](https://github.com/potahcoin-core/qa-assets) repo.
 
-To fuzz `process_message` using the [`bitcoin-core/qa-assets`](https://github.com/bitcoin-core/qa-assets) seed corpus:
+To fuzz `process_message` using the [`potahcoin-core/qa-assets`](https://github.com/potahcoin-core/qa-assets) seed corpus:
 
 ```sh
-$ git clone https://github.com/bitcoin-core/qa-assets
+$ git clone https://github.com/potahcoin-core/qa-assets
 $ src/test/fuzz/process_message qa-assets/fuzz_seed_corpus/process_message/
 INFO: Seed: 1346407872
 INFO: Loaded 1 modules   (424174 inline 8-bit counters): 424174 [0x55d8a9004ab8, 0x55d8a906c3a6),
@@ -81,9 +81,9 @@ INFO: seed corpus: files: 991 min: 1b max: 1858b total: 288291b rss: 150Mb
 …
 ```
 
-If you find coverage increasing inputs when fuzzing you are highly encouraged to submit them for inclusion in the [`bitcoin-core/qa-assets`](https://github.com/bitcoin-core/qa-assets) repo.
+If you find coverage increasing inputs when fuzzing you are highly encouraged to submit them for inclusion in the [`potahcoin-core/qa-assets`](https://github.com/potahcoin-core/qa-assets) repo.
 
-Every single pull request submitted against the Potahcoin Core repo is automatically tested against all inputs in the [`bitcoin-core/qa-assets`](https://github.com/bitcoin-core/qa-assets) repo. Contributing new coverage increasing inputs is an easy way to help make Potahcoin Core more robust.
+Every single pull request submitted against the Potahcoin Core repo is automatically tested against all inputs in the [`potahcoin-core/qa-assets`](https://github.com/potahcoin-core/qa-assets) repo. Contributing new coverage increasing inputs is an easy way to help make Potahcoin Core more robust.
 
 ## macOS hints for libFuzzer
 
@@ -136,15 +136,15 @@ $ afl/afl-fuzz -i inputs/ -o outputs/ -- src/test/fuzz/bech32
 
 Read the [`afl-fuzz` documentation](https://github.com/google/afl) for more information.
 
-# Fuzzing Bitcoin Core using Honggfuzz
+# Fuzzing Potahcoin Core using Honggfuzz
 
 ## Quickstart guide
 
-To quickly get started fuzzing Bitcoin Core using [Honggfuzz](https://github.com/google/honggfuzz):
+To quickly get started fuzzing Potahcoin Core using [Honggfuzz](https://github.com/google/honggfuzz):
 
 ```sh
-$ git clone https://github.com/bitcoin/bitcoin
-$ cd bitcoin/
+$ git clone https://github.com/potahcoin/potahcoin
+$ cd potahcoin/
 $ ./autogen.sh
 $ git clone https://github.com/google/honggfuzz
 $ cd honggfuzz/

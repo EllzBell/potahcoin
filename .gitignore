@@ -36,8 +36,8 @@ config.log
 config.status
 configure
 libtool
-src/config/bitcoin-config.h
-src/config/bitcoin-config.h.in
+src/config/potahcoin-config.h
+src/config/potahcoin-config.h.in
 src/config/stamp-h1
 src/obj
 share/setup.nsi
@@ -51,11 +51,11 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
-src/qt/bitcoin-qt.config
-src/qt/bitcoin-qt.creator
-src/qt/bitcoin-qt.creator.user
-src/qt/bitcoin-qt.files
-src/qt/bitcoin-qt.includes
+src/qt/potahcoin-qt.config
+src/qt/potahcoin-qt.creator
+src/qt/potahcoin-qt.creator.user
+src/qt/potahcoin-qt.files
+src/qt/potahcoin-qt.includes
 
 .deps
 .dirstamp
@@ -137,7 +137,7 @@ test/.mypy_cache/
 
 /doc/doxygen/
 
-libbitcoinconsensus.pc
+libpotahcoinconsensus.pc
 contrib/devtools/split-debug.sh
 
 # Output from running db4 installation

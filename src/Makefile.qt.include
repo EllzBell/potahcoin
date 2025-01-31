@@ -1,16 +1,16 @@
-# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Copyright (c) 2013-2016 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 bin_PROGRAMS += qt/potahcoin-qt
 
-if BUILD_BITCOIN_GUI
+if BUILD_POTAHCOIN_GUI
   bin_PROGRAMS += potahcoin-gui
 endif
 
-EXTRA_LIBRARIES += qt/libbitcoinqt.a
+EXTRA_LIBRARIES += qt/libpotahcoinqt.a
 
-# bitcoin qt core #
+# potahcoin qt core #
 include Makefile.qt_locale.include
 
 QT_FORMS_UI = \
@@ -40,11 +40,11 @@ QT_MOC_CPP = \
   qt/moc_askpassphrasedialog.cpp \
   qt/moc_createwalletdialog.cpp \
   qt/moc_bantablemodel.cpp \
-  qt/moc_bitcoinaddressvalidator.cpp \
-  qt/moc_bitcoinamountfield.cpp \
-  qt/moc_bitcoin.cpp \
-  qt/moc_bitcoingui.cpp \
-  qt/moc_bitcoinunits.cpp \
+  qt/moc_potahcoinaddressvalidator.cpp \
+  qt/moc_potahcoinamountfield.cpp \
+  qt/moc_potahcoin.cpp \
+  qt/moc_potahcoingui.cpp \
+  qt/moc_potahcoinunits.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
@@ -87,32 +87,32 @@ QT_MOC_CPP = \
   qt/moc_walletmodel.cpp \
   qt/moc_walletview.cpp
 
-BITCOIN_MM = \
+POTAHCOIN_MM = \
   qt/macdockiconhandler.mm \
   qt/macnotificationhandler.mm \
   qt/macos_appnap.mm
 
 QT_MOC = \
-  qt/bitcoinamountfield.moc \
+  qt/potahcoinamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
-QT_QRC_CPP = qt/qrc_bitcoin.cpp
-QT_QRC = qt/bitcoin.qrc
-QT_QRC_LOCALE_CPP = qt/qrc_bitcoin_locale.cpp
-QT_QRC_LOCALE = qt/bitcoin_locale.qrc
+QT_QRC_CPP = qt/qrc_potahcoin.cpp
+QT_QRC = qt/potahcoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_potahcoin_locale.cpp
+QT_QRC_LOCALE = qt/potahcoin_locale.qrc
 
-BITCOIN_QT_H = \
+POTAHCOIN_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
   qt/bantablemodel.h \
-  qt/bitcoinaddressvalidator.h \
-  qt/bitcoinamountfield.h \
-  qt/bitcoin.h \
-  qt/bitcoingui.h \
-  qt/bitcoinunits.h \
+  qt/potahcoinaddressvalidator.h \
+  qt/potahcoinamountfield.h \
+  qt/potahcoin.h \
+  qt/potahcoingui.h \
+  qt/potahcoinunits.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
@@ -166,9 +166,9 @@ BITCOIN_QT_H = \
 RES_ICONS = \
   qt/res/icons/add.png \
   qt/res/icons/address-book.png \
-  qt/res/icons/bitcoin.ico \
-  qt/res/icons/bitcoin_testnet.ico \
-  qt/res/icons/bitcoin.png \
+  qt/res/icons/potahcoin.ico \
+  qt/res/icons/potahcoin_testnet.ico \
+  qt/res/icons/potahcoin.png \
   qt/res/icons/chevron.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
@@ -212,13 +212,13 @@ RES_ICONS = \
   qt/res/icons/tx_mined.png \
   qt/res/icons/warning.png
 
-BITCOIN_QT_BASE_CPP = \
+POTAHCOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
-  qt/bitcoin.cpp \
-  qt/bitcoinaddressvalidator.cpp \
-  qt/bitcoinamountfield.cpp \
-  qt/bitcoingui.cpp \
-  qt/bitcoinunits.cpp \
+  qt/potahcoin.cpp \
+  qt/potahcoinaddressvalidator.cpp \
+  qt/potahcoinamountfield.cpp \
+  qt/potahcoingui.cpp \
+  qt/potahcoinunits.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
@@ -237,9 +237,9 @@ BITCOIN_QT_BASE_CPP = \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp
 
-BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+POTAHCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
 
-BITCOIN_QT_WALLET_CPP = \
+POTAHCOIN_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
@@ -269,32 +269,32 @@ BITCOIN_QT_WALLET_CPP = \
   qt/walletmodeltransaction.cpp \
   qt/walletview.cpp
 
-BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+POTAHCOIN_QT_CPP = $(POTAHCOIN_QT_BASE_CPP)
 if TARGET_WINDOWS
-BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+POTAHCOIN_QT_CPP += $(POTAHCOIN_QT_WINDOWS_CPP)
 endif
 if ENABLE_WALLET
-BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+POTAHCOIN_QT_CPP += $(POTAHCOIN_QT_WALLET_CPP)
 endif # ENABLE_WALLET
 
 RES_ANIMATION = $(wildcard $(srcdir)/qt/res/animation/spinner-*.png)
 
-BITCOIN_RC = qt/res/bitcoin-qt-res.rc
+POTAHCOIN_RC = qt/res/potahcoin-qt-res.rc
 
-BITCOIN_QT_INCLUDES = -DQT_NO_KEYWORDS
+POTAHCOIN_QT_INCLUDES = -DQT_NO_KEYWORDS
 
-qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+qt_libpotahcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(POTAHCOIN_INCLUDES) $(POTAHCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(QR_CFLAGS)
-qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
-qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+qt_libpotahcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libpotahcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+qt_libpotahcoinqt_a_SOURCES = $(POTAHCOIN_QT_CPP) $(POTAHCOIN_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(RES_ICONS) $(RES_ANIMATION)
 if TARGET_DARWIN
-  qt_libbitcoinqt_a_SOURCES += $(BITCOIN_MM)
+  qt_libpotahcoinqt_a_SOURCES += $(POTAHCOIN_MM)
 endif
 
-nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+nodist_qt_libpotahcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
 
 # forms/foo.h -> forms/ui_foo.h
 QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
@@ -302,25 +302,25 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
-$(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_qt_OBJECTS) $(bitcoin_gui_OBJECTS) : | $(QT_MOC)
+$(qt_libpotahcoinqt_a_OBJECTS) $(qt_potahcoin_qt_OBJECTS) $(potahcoin_gui_OBJECTS) : | $(QT_MOC)
 
-# bitcoin-qt and bitcoin-gui binaries #
-potahcoin_qt_cppflags = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+# potahcoin-qt and potahcoin-gui binaries #
+potahcoin_qt_cppflags = $(AM_CPPFLAGS) $(POTAHCOIN_INCLUDES) $(POTAHCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QR_CFLAGS)
 potahcoin_qt_cxxflags = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
 potahcoin_qt_sources = qt/main.cpp
 if TARGET_WINDOWS
-  potahcoin_qt_sources += $(BITCOIN_RC)
+  potahcoin_qt_sources += $(POTAHCOIN_RC)
 endif
-potahcoin_qt_ldadd = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+potahcoin_qt_ldadd = qt/libpotahcoinqt.a $(LIBPOTAHCOIN_SERVER)
 if ENABLE_WALLET
-potahcoin_qt_ldadd += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+potahcoin_qt_ldadd += $(LIBPOTAHCOIN_UTIL) $(LIBPOTAHCOIN_WALLET)
 endif
 if ENABLE_ZMQ
-potahcoin_qt_ldadd += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+potahcoin_qt_ldadd += $(LIBPOTAHCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-potahcoin_qt_ldadd += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+potahcoin_qt_ldadd += $(LIBPOTAHCOIN_CLI) $(LIBPOTAHCOIN_COMMON) $(LIBPOTAHCOIN_UTIL) $(LIBPOTAHCOIN_CONSENSUS) $(LIBPOTAHCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
   $(LIBMW) $(MWEB_LIBS) $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) $(CRYPTO_LIBS) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(SQLITE_LIBS)
 potahcoin_qt_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
@@ -345,34 +345,34 @@ QT_QM=$(QT_TS:.ts=.qm)
 
 SECONDARY: $(QT_QM)
 
-$(srcdir)/qt/bitcoinstrings.cpp: FORCE
+$(srcdir)/qt/potahcoinstrings.cpp: FORCE
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
-	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" $(PYTHON) ../share/qt/extract_strings_qt.py $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_consensus_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" $(PYTHON) ../share/qt/extract_strings_qt.py $(libpotahcoin_server_a_SOURCES) $(libpotahcoin_wallet_a_SOURCES) $(libpotahcoin_common_a_SOURCES) $(libpotahcoin_zmq_a_SOURCES) $(libpotahcoin_consensus_a_SOURCES) $(libpotahcoin_util_a_SOURCES)
 
-translate: $(srcdir)/qt/bitcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/bitcoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+translate: $(srcdir)/qt/potahcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(POTAHCOIN_QT_BASE_CPP) qt/potahcoin.cpp $(POTAHCOIN_QT_WINDOWS_CPP) $(POTAHCOIN_QT_WALLET_CPP) $(POTAHCOIN_QT_H) $(POTAHCOIN_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/bitcoin_en.ts
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/potahcoin_en.ts
 
 $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	@test -f $(RCC)
 	@cp -f $< $(@D)/temp_$(<F)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcoin_locale $(@D)/temp_$(<F) | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name potahcoin_locale $(@D)/temp_$(<F) | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 	@rm $(@D)/temp_$(<F)
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_ANIMATION)
 	@test -f $(RCC)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcoin $< | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name potahcoin $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_bitcoin_locale.qrc
+CLEAN_QT = $(nodist_qt_libpotahcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_potahcoin_locale.qrc
 
 CLEANFILES += $(CLEAN_QT)
 
-bitcoin_qt_clean: FORCE
-	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_potahcoin_qt_OBJECTS) qt/potahcoin-qt$(EXEEXT) $(LIBBITCOINQT)
+potahcoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libpotahcoinqt_a_OBJECTS) $(qt_potahcoin_qt_OBJECTS) qt/potahcoin-qt$(EXEEXT) $(LIBPOTAHCOINQT)
 
-bitcoin_qt : qt/potahcoin-qt$(EXEEXT)
+potahcoin_qt : qt/potahcoin-qt$(EXEEXT)
 
 ui_%.h: %.ui
 	@test -f $(UIC)

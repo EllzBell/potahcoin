@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2020 The Bitcoin Core developers
+# Copyright (c) 2020 The Potahcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the send RPC command."""
@@ -8,7 +8,7 @@ from decimal import Decimal, getcontext
 from itertools import product
 
 from test_framework.authproxy import JSONRPCException
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_fee_amount,
@@ -16,7 +16,7 @@ from test_framework.util import (
     assert_raises_rpc_error,
 )
 
-class WalletSendTest(BitcoinTestFramework):
+class WalletSendTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         # whitelist all peers to speed up tx relay / mempool sync

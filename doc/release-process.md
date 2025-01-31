@@ -5,8 +5,8 @@ Release Process
 
 ### Before every release candidate
 
-* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#synchronising-translations).
-* Update manpages, see [gen-manpages.sh](https://github.com/bitcoin/bitcoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/potahcoin/potahcoin/blob/master/doc/translation_process.md#synchronising-translations).
+* Update manpages, see [gen-manpages.sh](https://github.com/potahcoin/potahcoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
 * Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`).
 
 ### Before every major and minor release
@@ -19,17 +19,17 @@ Release Process
 
 * On both the master branch and the new release branch:
   - update `CLIENT_VERSION_MINOR` in [`configure.ac`](../configure.ac)
-  - update `CLIENT_VERSION_MINOR`, `PACKAGE_VERSION`, and `PACKAGE_STRING` in [`build_msvc/bitcoin_config.h`](/build_msvc/bitcoin_config.h)
-* On the new release branch in [`configure.ac`](../configure.ac) and [`build_msvc/bitcoin_config.h`](/build_msvc/bitcoin_config.h) (see [this commit](https://github.com/bitcoin/bitcoin/commit/742f7dd)):
+  - update `CLIENT_VERSION_MINOR`, `PACKAGE_VERSION`, and `PACKAGE_STRING` in [`build_msvc/potahcoin_config.h`](/build_msvc/potahcoin_config.h)
+* On the new release branch in [`configure.ac`](../configure.ac) and [`build_msvc/potahcoin_config.h`](/build_msvc/potahcoin_config.h) (see [this commit](https://github.com/potahcoin/potahcoin/commit/742f7dd)):
   - set `CLIENT_VERSION_REVISION` to `0`
   - set `CLIENT_VERSION_IS_RELEASE` to `true`
 
 #### Before branch-off
 
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcoin/bitcoin/pull/7415) for an example.
+* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/potahcoin/potahcoin/pull/7415) for an example.
 * Update [`src/chainparams.cpp`](/src/chainparams.cpp) m_assumed_blockchain_size and m_assumed_chain_state_size with the current size plus some overhead (see [this](#how-to-calculate-assumed-blockchain-and-chain-state-size) for information on how to calculate them).
 * Update [`src/chainparams.cpp`](/src/chainparams.cpp) chainTxData with statistics about the transaction count and rate. Use the output of the `getchaintxstats` RPC, see
-  [this pull request](https://github.com/bitcoin/bitcoin/pull/20263) for an example. Reviewers can verify the results by running `getchaintxstats <window_block_count> <window_final_block_hash>` with the `window_block_count` and `window_final_block_hash` from your output.
+  [this pull request](https://github.com/potahcoin/potahcoin/pull/20263) for an example. Reviewers can verify the results by running `getchaintxstats <window_block_count> <window_final_block_hash>` with the `window_block_count` and `window_final_block_hash` from your output.
 * Update `src/chainparams.cpp` nMinimumChainWork and defaultAssumeValid (and the block height comment) with information from the `getblockheader` (and `getblockhash`) RPCs.
   - The selected value must not be orphaned so it may be useful to set the value two blocks back from the tip.
   - Testnet should be set some tens of thousands back from the tip due to reorgs there.
@@ -44,7 +44,7 @@ Release Process
 #### After branch-off (on the major release branch)
 
 - Update the versions.
-- Create a pinned meta-issue for testing the release candidate (see [this issue](https://github.com/bitcoin/bitcoin/issues/17079) for an example) and provide a link to it in the release announcements where useful.
+- Create a pinned meta-issue for testing the release candidate (see [this issue](https://github.com/potahcoin/potahcoin/issues/17079) for an example) and provide a link to it in the release announcements where useful.
 
 #### Before final release
 
@@ -322,37 +322,37 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
 - Update other repositories and websites for new version
 
-  - bitcoincore.org blog post
+  - potahcoincore.org blog post
 
-  - bitcoincore.org maintained versions update:
-    [table](https://github.com/bitcoin-core/bitcoincore.org/commits/master/_includes/posts/maintenance-table.md)
+  - potahcoincore.org maintained versions update:
+    [table](https://github.com/potahcoin-core/potahcoincore.org/commits/master/_includes/posts/maintenance-table.md)
 
-  - bitcoincore.org RPC documentation update
+  - potahcoincore.org RPC documentation update
 
   - Update packaging repo
 
-      - Push the flatpak to flathub, e.g. https://github.com/flathub/org.bitcoincore.bitcoin-qt/pull/2
+      - Push the flatpak to flathub, e.g. https://github.com/flathub/org.potahcoincore.potahcoin-qt/pull/2
 
-      - Push the latest version to master (if applicable), e.g. https://github.com/bitcoin-core/packaging/pull/32
+      - Push the latest version to master (if applicable), e.g. https://github.com/potahcoin-core/packaging/pull/32
 
       - Create a new branch for the major release "0.xx" from master (used to build the snap package) and request the
-        track (if applicable), e.g. https://forum.snapcraft.io/t/track-request-for-bitcoin-core-snap/10112/7
+        track (if applicable), e.g. https://forum.snapcraft.io/t/track-request-for-potahcoin-core-snap/10112/7
 
       - Notify MarcoFalke so that he can start building the snap package
 
-        - https://code.launchpad.net/~bitcoin-core/bitcoin-core-snap/+git/packaging (Click "Import Now" to fetch the branch)
-        - https://code.launchpad.net/~bitcoin-core/bitcoin-core-snap/+git/packaging/+ref/0.xx (Click "Create snap package")
-        - Name it "bitcoin-core-snap-0.xx"
+        - https://code.launchpad.net/~potahcoin-core/potahcoin-core-snap/+git/packaging (Click "Import Now" to fetch the branch)
+        - https://code.launchpad.net/~potahcoin-core/potahcoin-core-snap/+git/packaging/+ref/0.xx (Click "Create snap package")
+        - Name it "potahcoin-core-snap-0.xx"
         - Leave owner and series as-is
         - Select architectures that are compiled via gitian
         - Leave "automatically build when branch changes" unticked
         - Tick "automatically upload to store"
-        - Put "bitcoin-core" in the registered store package name field
+        - Put "potahcoin-core" in the registered store package name field
         - Tick the "edge" box
         - Put "0.xx" in the track field
         - Click "create snap package"
         - Click "Request builds" for every new release on this branch (after updating the snapcraft.yml in the branch to reflect the latest gitian results)
-        - Promote release on https://snapcraft.io/bitcoin-core/releases if it passes sanity checks
+        - Promote release on https://snapcraft.io/potahcoin-core/releases if it passes sanity checks
 
 - Announce the release:
 

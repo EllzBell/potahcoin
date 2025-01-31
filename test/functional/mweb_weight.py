@@ -6,10 +6,10 @@
 
 from decimal import Decimal
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.util import assert_equal
 
-class MWEBWeightTest(BitcoinTestFramework):
+class MWEBWeightTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.rpc_timeout = 120

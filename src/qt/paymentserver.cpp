@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019 The Bitcoin Core developers
+// Copyright (c) 2011-2019 The Potahcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/potahcoin-config.h>
 #endif
 
 #include <qt/paymentserver.h>
 
-#include <qt/bitcoinunits.h>
+#include <qt/potahcoinunits.h>
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 
@@ -37,8 +37,8 @@
 #include <QStringList>
 #include <QUrlQuery>
 
-const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("potahcoin:");
+const int POTAHCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
+const QString POTAHCOIN_IPC_PREFIX("potahcoin:");
 
 //
 // Create a name that is unique for:
@@ -82,17 +82,17 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
         if (arg.startsWith("-"))
             continue;
 
-        // If the bitcoin: URI contains a payment request, we are not able to detect the
+        // If the potahcoin: URI contains a payment request, we are not able to detect the
         // network as that would require fetching and parsing the payment request.
         // That means clicking such an URI which contains a testnet payment request
         // will start a mainnet instance and throw a "wrong network" error.
-        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitcoin: URI
+        if (arg.startsWith(POTAHCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // potahcoin: URI
         {
             if (savedPaymentRequests.contains(arg)) continue;
             savedPaymentRequests.insert(arg);
 
             SendCoinsRecipient r;
-            if (GUIUtil::parseBitcoinURI(arg, &r) && !r.address.isEmpty())
+            if (GUIUtil::parsePotahcoinURI(arg, &r) && !r.address.isEmpty())
             {
                 auto tempChainParams = CreateChainParams(gArgs, CBaseChainParams::MAIN);
 
@@ -122,7 +122,7 @@ bool PaymentServer::ipcSendCommandLine()
     {
         QLocalSocket* socket = new QLocalSocket();
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
-        if (!socket->waitForConnected(BITCOIN_IPC_CONNECT_TIMEOUT))
+        if (!socket->waitForConnected(POTAHCOIN_IPC_CONNECT_TIMEOUT))
         {
             delete socket;
             socket = nullptr;
@@ -137,7 +137,7 @@ bool PaymentServer::ipcSendCommandLine()
 
         socket->write(block);
         socket->flush();
-        socket->waitForBytesWritten(BITCOIN_IPC_CONNECT_TIMEOUT);
+        socket->waitForBytesWritten(POTAHCOIN_IPC_CONNECT_TIMEOUT);
         socket->disconnectFromServer();
 
         delete socket;
@@ -155,7 +155,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
     optionsModel(nullptr)
 {
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click bitcoin: links
+    // on Mac: sent when you click potahcoin: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -185,7 +185,7 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling bitcoin: URIs
+// OSX-specific way of handling potahcoin: URIs
 //
 bool PaymentServer::eventFilter(QObject *object, QEvent *event)
 {
@@ -225,13 +225,13 @@ void PaymentServer::handleURIOrFile(const QString& s)
         Q_EMIT message(tr("URI handling"), tr("'potahcoin://' is not a valid URI. Use 'potahcoin:' instead."),
             CClientUIInterface::MSG_ERROR);
     }
-    else if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitcoin: URI
+    else if (s.startsWith(POTAHCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // potahcoin: URI
     {
         QUrlQuery uri((QUrl(s)));
         // normal URI
         {
             SendCoinsRecipient recipient;
-            if (GUIUtil::parseBitcoinURI(s, &recipient))
+            if (GUIUtil::parsePotahcoinURI(s, &recipient))
             {
                 if (!IsValidDestinationString(recipient.address.toStdString())) {
                     if (uri.hasQueryItem("r")) {  // payment request

@@ -142,7 +142,7 @@ script: |
     find . -name "lib*.la" -delete
     find . -name "lib*.a" -delete
     rm -rf ${DISTNAME}/lib/pkgconfig
-    # Potahcoin: Delete libbitcoin from binary distribution for now, see #192
+    # Potahcoin: Delete libpotahcoin from binary distribution for now, see #192
     rm -rf ${DISTNAME:?}/lib/
     rm -rf ${DISTNAME}/include/
     # Potahcoin: ends

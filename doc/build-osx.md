@@ -31,7 +31,7 @@ brew install librsvg
 ```
 
 The wallet support requires one or both of the dependencies ([*SQLite*](#sqlite) and [*Berkeley DB*](#berkeley-db)) in the sections below.
-To build Bitcoin Core without wallet, see [*Disable-wallet mode*](#disable-wallet-mode).
+To build Potahcoin Core without wallet, see [*Disable-wallet mode*](#disable-wallet-mode).
 
 #### SQLite
 
@@ -132,4 +132,4 @@ tail -f $HOME/Library/Application\ Support/Potahcoin/debug.log
 ## Notes
 * Tested on OS X 10.14 Mojave through macOS 11 Big Sur on 64-bit Intel
 processors only.
-* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcoin/bitcoin/issues/7714).
+* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/potahcoin/potahcoin/issues/7714).

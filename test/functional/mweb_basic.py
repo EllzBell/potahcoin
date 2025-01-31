@@ -4,10 +4,10 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Basic MWEB test"""
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import PotahcoinTestFramework
 from test_framework.util import assert_equal
 
-class MWEBBasicTest(BitcoinTestFramework):
+class MWEBBasicTest(PotahcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.extra_args = [['-whitelist=noban@127.0.0.1'],[]]  # immediate tx relay

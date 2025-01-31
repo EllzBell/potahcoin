@@ -1,12 +1,12 @@
-// Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2009-2020 The Potahcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NETADDRESS_H
-#define BITCOIN_NETADDRESS_H
+#ifndef POTAHCOIN_NETADDRESS_H
+#define POTAHCOIN_NETADDRESS_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/potahcoin-config.h>
 #endif
 
 #include <attributes.h>
@@ -84,7 +84,7 @@ static const std::array<uint8_t, 6> TORV2_IN_IPV6_PREFIX{
 
 /// Prefix of an IPv6 address when it contains an embedded "internal" address.
 /// Used when (un)serializing addresses in ADDRv1 format (pre-BIP155).
-/// The prefix comes from 0xFD + SHA256("bitcoin")[0:5].
+/// The prefix comes from 0xFD + SHA256("potahcoin")[0:5].
 /// Such dummy IPv6 addresses are guaranteed to not be publicly routable as they
 /// fall under RFC4193's fc00::/7 subnet allocated to unique-local addresses.
 static const std::array<uint8_t, 6> INTERNAL_IN_IPV6_PREFIX{
@@ -553,4 +553,4 @@ class CService : public CNetAddr
 
 bool SanityCheckASMap(const std::vector<bool>& asmap);
 
-#endif // BITCOIN_NETADDRESS_H
+#endif // POTAHCOIN_NETADDRESS_H

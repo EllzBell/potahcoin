@@ -32,7 +32,7 @@ The elliptic curve cryptography, including schnorr, musig, pedersen, and bulletp
 
 This code comes from https://github.com/mimblewimble/secp256k1-zkp,
 which was built on top of https://github.com/elementsproject/secp256k1-zkp,
-which was built on top of https://github.com/bitcoin/bitcoin/tree/master/src/secp256k1
+which was built on top of https://github.com/potahcoin/potahcoin/tree/master/src/secp256k1
 
 Before releasing, we should see if the latest version of https://github.com/elementsproject/secp256k1-zkp contains all of the modules we need,
 since it gets a lot of attention from cryptographers. Additionally, it would be wise to remove this from the deps directory,

@@ -5,9 +5,9 @@ It is possible to run Potahcoin Core as a Tor onion service, and connect to such
 The following directions assume you have a Tor proxy running on port 9050. Many distributions default to having a SOCKS proxy listening on port 9050, but others may not. In particular, the Tor Browser Bundle defaults to listening on port 9150. See [Tor Project FAQ:TBBSocksPort](https://www.torproject.org/docs/faq.html.en#TBBSocksPort) for how to properly
 configure Tor.
 
-## How to see information about your Tor configuration via Bitcoin Core
+## How to see information about your Tor configuration via Potahcoin Core
 
-There are several ways to see your local onion address in Bitcoin Core:
+There are several ways to see your local onion address in Potahcoin Core:
 - in the debug log (grep for "tor:" or "AddLocal")
 - in the output of RPC `getnetworkinfo` in the "localaddresses" section
 - in the output of the CLI `-netinfo` peer connections dashboard

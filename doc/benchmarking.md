@@ -45,6 +45,6 @@ More benchmarks are needed for, in no particular order:
 Going Further
 --------------------
 
-To monitor Potahcoin Core performance more in depth (like reindex or IBD): https://github.com/chaincodelabs/bitcoinperf
+To monitor Potahcoin Core performance more in depth (like reindex or IBD): https://github.com/chaincodelabs/potahcoinperf
 
-To generate Flame Graphs for Potahcoin Core: https://github.com/eklitzke/bitcoin/blob/flamegraphs/doc/flamegraphs.md
+To generate Flame Graphs for Potahcoin Core: https://github.com/eklitzke/potahcoin/blob/flamegraphs/doc/flamegraphs.md

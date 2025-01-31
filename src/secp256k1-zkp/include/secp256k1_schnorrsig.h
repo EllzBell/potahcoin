@@ -9,8 +9,8 @@ extern "C" {
 # endif
 
 /** This module implements a variant of Schnorr signatures compliant with
- *  Bitcoin Improvement Proposal 340 "Schnorr Signatures for secp256k1"
- *  (https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki).
+ *  Potahcoin Improvement Proposal 340 "Schnorr Signatures for secp256k1"
+ *  (https://github.com/potahcoin/bips/blob/master/bip-0340.mediawiki).
  */
 
 /** A pointer to a function to deterministically generate a nonce.

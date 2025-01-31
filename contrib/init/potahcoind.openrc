@@ -1,0 +1,92 @@
+#!/sbin/openrc-run
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/potahcoin/.potahcoin" ]; then
+	POTAHCOIND_DEFAULT_DATADIR="/var/lib/potahcoin/.potahcoin"
+else
+	POTAHCOIND_DEFAULT_DATADIR="/var/lib/potahcoind"
+fi
+
+POTAHCOIND_CONFIGFILE=${POTAHCOIND_CONFIGFILE:-/etc/potahcoin/potahcoin.conf}
+POTAHCOIND_PIDDIR=${POTAHCOIND_PIDDIR:-/var/run/potahcoind}
+POTAHCOIND_PIDFILE=${POTAHCOIND_PIDFILE:-${POTAHCOIND_PIDDIR}/potahcoind.pid}
+POTAHCOIND_DATADIR=${POTAHCOIND_DATADIR:-${POTAHCOIND_DEFAULT_DATADIR}}
+POTAHCOIND_USER=${POTAHCOIND_USER:-${POTAHCOIN_USER:-potahcoin}}
+POTAHCOIND_GROUP=${POTAHCOIND_GROUP:-potahcoin}
+POTAHCOIND_BIN=${POTAHCOIND_BIN:-/usr/bin/potahcoind}
+POTAHCOIND_NICE=${POTAHCOIND_NICE:-${NICELEVEL:-0}}
+POTAHCOIND_OPTS="${POTAHCOIND_OPTS:-${POTAHCOIN_OPTS}}"
+
+name="Potahcoin Core Daemon"
+description="Potahcoin cryptocurrency P2P network daemon"
+
+command="/usr/bin/potahcoind"
+command_args="-pid=\"${POTAHCOIND_PIDFILE}\" \
+		-conf=\"${POTAHCOIND_CONFIGFILE}\" \
+		-datadir=\"${POTAHCOIND_DATADIR}\" \
+		-daemon \
+		${POTAHCOIND_OPTS}"
+
+required_files="${POTAHCOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${POTAHCOIND_USER} \
+			-N ${POTAHCOIND_NICE} -w 2000"
+pidfile="${POTAHCOIND_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${POTAHCOIND_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${POTAHCOIND_USER}:${POTAHCOIND_GROUP}" \
+	"${POTAHCOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${POTAHCOIND_USER}:${POTAHCOIND_GROUP}" \
+	"${POTAHCOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${POTAHCOIND_USER}:${POTAHCOIND_GROUP} \
+	-m 0660 \
+	${POTAHCOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${POTAHCOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run potahcoind."
+		eerror "The setting must appear in ${POTAHCOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Potahcoin Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

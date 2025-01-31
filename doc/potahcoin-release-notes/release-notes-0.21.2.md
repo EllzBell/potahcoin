@@ -114,7 +114,7 @@ Credits
 
 Thanks to everyone who directly contributed to this release:
 
-- [The Bitcoin Core Developers](https://github.com/bitcoin/bitcoin/tree/master/doc/release-notes)
+- [The Potahcoin Core Developers](https://github.com/potahcoin/potahcoin/tree/master/doc/release-notes)
 - DavidBurkett
 - hectorchu
 - losh11

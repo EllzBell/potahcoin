@@ -6,7 +6,7 @@ welcome to contribute towards development in the form of peer review, testing
 and patches. This document explains the practical process and guidelines for
 contributing.
 
-First, in terms of structure, there is no particular concept of "Bitcoin Core
+First, in terms of structure, there is no particular concept of "Potahcoin Core
 developers" in the sense of privileged people. Open source often naturally
 revolves around a meritocracy where contributors earn trust from the developer
 community over time. Nevertheless, some hierarchy is necessary for practical
@@ -27,18 +27,18 @@ section below.
 
 Before you start contributing, familiarize yourself with the Potahcoin Core build
 system and tests. Refer to the documentation in the repository on how to build
-Bitcoin Core and how to run the unit tests, functional tests, and fuzz tests.
+Potahcoin Core and how to run the unit tests, functional tests, and fuzz tests.
 
 There are many open issues of varying difficulty waiting to be fixed.
 If you're looking for somewhere to start contributing, check out the
-[good first issue](https://github.com/bitcoin/bitcoin/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+[good first issue](https://github.com/potahcoin/potahcoin/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
 list or changes that are
-[up for grabs](https://github.com/bitcoin/bitcoin/issues?utf8=%E2%9C%93&q=label%3A%22Up+for+grabs%22).
+[up for grabs](https://github.com/potahcoin/potahcoin/issues?utf8=%E2%9C%93&q=label%3A%22Up+for+grabs%22).
 Some of them might no longer be applicable. So if you are interested, but
 unsure, you might want to leave a comment on the issue first.
 
 You may also participate in the weekly
-[Bitcoin Core PR Review Club](https://bitcoincore.reviews/) meeting.
+[Potahcoin Core PR Review Club](https://potahcoincore.reviews/) meeting.
 
 ### Good First Issue Label
 
@@ -56,12 +56,12 @@ and is also an effective way to request assistance if and when you need it.
 Communication Channels
 ----------------------
 
-Most communication about Bitcoin Core development happens on IRC, in the
-`#bitcoin-core-dev` channel on Freenode. The easiest way to participate on IRC is
+Most communication about Potahcoin Core development happens on IRC, in the
+`#potahcoin-core-dev` channel on Freenode. The easiest way to participate on IRC is
 with the web client, [webchat.freenode.net](https://webchat.freenode.net/). Chat
 history logs can be found
-on [http://www.erisian.com.au/bitcoin-core-dev/](http://www.erisian.com.au/bitcoin-core-dev/)
-and [http://gnusha.org/bitcoin-core-dev/](http://gnusha.org/bitcoin-core-dev/).
+on [http://www.erisian.com.au/potahcoin-core-dev/](http://www.erisian.com.au/potahcoin-core-dev/)
+and [http://gnusha.org/potahcoin-core-dev/](http://gnusha.org/potahcoin-core-dev/).
 
 Discussion about codebase improvements happens in GitHub issues and pull
 requests.
@@ -85,8 +85,8 @@ To contribute a patch, the workflow is as follows:
   1. Create topic branch
   1. Commit patches
 
-For GUI-related issues or pull requests, the https://github.com/bitcoin-core/gui repository should be used.
-For all other issues and pull requests, the https://github.com/bitcoin/bitcoin node repository should be used.
+For GUI-related issues or pull requests, the https://github.com/potahcoin-core/gui repository should be used.
+For all other issues and pull requests, the https://github.com/potahcoin/potahcoin node repository should be used.
 
 The master branch for all monotree repositories is identical.
 
@@ -170,13 +170,13 @@ mailing list discussions).
 The description for a new pull request should not contain any `@` mentions. The
 PR description will be included in the commit message when the PR is merged and
 any users mentioned in the description will be annoyingly notified each time a
-fork of Bitcoin Core copies the merge. Instead, make any username mentions in a
+fork of Potahcoin Core copies the merge. Instead, make any username mentions in a
 subsequent comment to the PR.
 
 ### Translation changes
 
 Note that translations should not be submitted as pull requests. Please see
-[Translation Process](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md)
+[Translation Process](https://github.com/potahcoin/potahcoin/blob/master/doc/translation_process.md)
 for more information on helping with translations.
 
 ### Work in Progress Changes and Requests for Comments
@@ -417,10 +417,10 @@ Rebased-From: <commit hash of the original commit>
 ```
 
 Have a look at [an example backport PR](
-https://github.com/bitcoin/bitcoin/pull/16189).
+https://github.com/potahcoin/potahcoin/pull/16189).
 
 Also see the [backport.py script](
-https://github.com/bitcoin-core/bitcoin-maintainer-tools#backport).
+https://github.com/potahcoin-core/potahcoin-maintainer-tools#backport).
 
 Release Policy
 --------------

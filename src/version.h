@@ -1,9 +1,9 @@
-// Copyright (c) 2012-2018 The Bitcoin Core developers
+// Copyright (c) 2012-2018 The Potahcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_VERSION_H
-#define BITCOIN_VERSION_H
+#ifndef POTAHCOIN_VERSION_H
+#define POTAHCOIN_VERSION_H
 
 /**
  * network protocol versioning
@@ -44,4 +44,4 @@ static const int MWEB_SYNC_VERSION = 70017;
 // Make sure that none of the values above collide with
 // `SERIALIZE_TRANSACTION_NO_WITNESS` or `ADDRV2_FORMAT`.
 
-#endif // BITCOIN_VERSION_H
+#endif // POTAHCOIN_VERSION_H

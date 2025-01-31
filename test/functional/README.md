@@ -23,7 +23,7 @@ don't have test cases for.
 - The oldest supported Python version is specified in [doc/dependencies.md](/doc/dependencies.md).
   Consider using [pyenv](https://github.com/pyenv/pyenv), which checks [.python-version](/.python-version),
   to prevent accidentally introducing modern syntax from an unsupported Python version.
-  The Travis linter also checks this, but [possibly not in all cases](https://github.com/bitcoin/bitcoin/pull/14884#discussion_r239585126).
+  The Travis linter also checks this, but [possibly not in all cases](https://github.com/potahcoin/potahcoin/pull/14884#discussion_r239585126).
 - See [the python lint script](/test/lint/lint-python.sh) that checks for violations that
   could lead to bugs and issues in the test code.
 - Use [type hints](https://docs.python.org/3/library/typing.html) in your code to improve code readability
@@ -31,7 +31,7 @@ don't have test cases for.
 - Avoid wildcard imports
 - Use a module-level docstring to describe what the test is testing, and how it
   is testing it.
-- When subclassing the BitcoinTestFramework, place overrides for the
+- When subclassing the PotahcoinTestFramework, place overrides for the
   `set_test_params()`, `add_options()` and `setup_xxxx()` methods at the top of
   the subclass, then locally-defined helper methods, then the `run_test()` method.
 - Use `'{}'.format(x)` for string formatting, not `'%s' % x`.
@@ -122,7 +122,7 @@ More examples can be found in [p2p_unrequested_blocks.py](p2p_unrequested_blocks
 
 #### Prototyping tests
 
-The [`TestShell`](test-shell.md) class exposes the BitcoinTestFramework
+The [`TestShell`](test-shell.md) class exposes the PotahcoinTestFramework
 functionality to interactive Python3 environments and can be used to prototype
 tests. This may be especially useful in a REPL environment with session logging
 utilities, such as
@@ -135,7 +135,7 @@ The following are useful modules for test developers. They are located in
 [test/functional/test_framework/](test_framework).
 
 #### [authproxy.py](test_framework/authproxy.py)
-Taken from the [python-bitcoinrpc repository](https://github.com/jgarzik/python-bitcoinrpc).
+Taken from the [python-potahcoinrpc repository](https://github.com/jgarzik/python-potahcoinrpc).
 
 #### [test_framework.py](test_framework/test_framework.py)
 Base class for functional tests.
@@ -147,7 +147,7 @@ Generally useful functions.
 Test objects for interacting with a potahcoind node over the p2p interface.
 
 #### [script.py](test_framework/script.py)
-Utilities for manipulating transaction scripts (originally from python-bitcoinlib)
+Utilities for manipulating transaction scripts (originally from python-potahcoinlib)
 
 #### [key.py](test_framework/key.py)
 Test-only secp256k1 elliptic curve implementation

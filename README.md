@@ -75,7 +75,7 @@ not straightforward.
 Translations
 ------------
 
-We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
+We only accept translation fixes that are submitted through [Potahcoin Core's Transifex page](https://www.transifex.com/projects/p/potahcoin/).
 Translations are converted to Potahcoin periodically.
 
 Translations are periodically pulled from Transifex and merged into the git repository. See the

@@ -15,7 +15,7 @@ Important Security Updates
 --------------------------
 
 This release contains fixes for [CVE-2023-33297](https://www.cvedetails.com/cve/CVE-2023-33297/), which allows attacker to cause a remote bandwidth and cpu denial of service. This attack has been exploited in the wild. 
-- `2170c24`: backported from Bitcoin Core v24.x
+- `2170c24`: backported from Potahcoin Core v24.x
 
 New MWEB features
 --------------------------
@@ -50,7 +50,7 @@ Credits
 
 Thanks to everyone who directly contributed to this release:
 
-- [The Bitcoin Core Developers](https://github.com/bitcoin/bitcoin/)
+- [The Potahcoin Core Developers](https://github.com/potahcoin/potahcoin/)
 - [David Burkett](https://github.com/DavidBurkett/)
 - [Hector Chu](https://github.com/hectorchu)
 - [Loshan](https://github.com/losh11)

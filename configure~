@@ -37292,7 +37292,7 @@ for ac_last_try in false false :; do
   fi
 done
 
-# For the awk script, D is an array of macro values ksproutd by name,
+# For the awk script, D is an array of macro values keyed by name,
 # likewise P contains macro parameters if any.  Preserve backslash
 # newline sequences.
 
